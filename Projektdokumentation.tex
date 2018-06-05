@@ -1,0 +1,246 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{acronym}
+\usepackage{esvect}
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{lmodern}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{color} 
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{setspace}
+
+\makeatletter
+\newcommand{\MSonehalfspacing}{%
+  \setstretch{1.44}%  default
+  \ifcase \@ptsize \relax % 10pt
+    \setstretch {1.448}%
+  \or % 11pt
+    \setstretch {1.399}%
+  \or % 12pt
+    \setstretch {1.433}%
+  \fi
+}
+\makeatother
+\MSonehalfspacing
+
+
+
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5} %/damit es auch im Inhaltsverzeichnis übernommen wird
+
+\author{Felix Waldbach, Marius Kiessling}
+\title{Travelposter Dokumentation}
+\date{September 2018}
+
+
+%\pagestyle{headings}
+
+\pagestyle{fancy}
+
+%Hier könnte ein Logo (DHBW) eingeführt werden
+\lhead{}
+\chead{}
+\rhead{\slshape \leftmark}
+
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+
+%\setkomafont{captionlabel}{\normalsize\bfseries} 
+%\setkomafont{caption}{\tiny}
+
+
+%Deckblatt
+\begin{titlepage}
+	\centering
+	%\includegraphics[width=0.15\textwidth]{example-image-1x1}\par\vspace{1cm}
+
+\begin{figure}
+\begin{minipage}[hbt]{5cm}
+	\centering
+	\includegraphics[scale=0.1]{Bilder_Doku/DHBW-Logo.png}	
+\end{minipage}
+\end{figure}
+\newlength{\drop}
+	\drop=1.5\textheight 
+	\centering	
+
+	%{\scshape\LARGE DHBW Stuttgart \par}
+	\textcolor{white}{\scshape\Large h}\par		
+	\vspace{1cm}
+	{\scshape\Large Praxisaufgabe\par}	
+	\vspace{1cm}
+	{\huge\bfseries Dokumentation des Projekts TravelPoster für das Wahlfach Microservices \par}
+	\vspace{1cm}
+	{\Large von\par}
+	{\Large\bfseries Felix Waldbach \& Marius Kiessling\par}
+	\vfill
+	\vspace{3cm}
+	{\scshape\Large \par}
+
+	\begin{tabular}{ll}
+		Abgabedatum: & 11. Juni 2018 \\		
+		Matrikelnummer, Kurs: & 8215018, /*1234567*/, TINF16B \\ 
+		Dozent: & 
+		Dr. Ingolf \textsc{Buttig}\\ 
+ 
+	\end{tabular}	
+	
+	\vfill
+
+% Bottom of the page
+	
+\end{titlepage}
+
+
+\newpage
+\chapter*{Abkürzungsverzeichnis}
+\begin{acronym}[slmtA]
+\acro{Ajax}{Asynchronous JavaScript and XML}
+\acro{MVC}{Model-View-Controller}
+\acro{UI}{User Interface}
+\end{acronym}  
+
+
+\newpage
+\tableofcontents
+
+\newpage
+\listoffigures
+
+\newpage
+\listoftables
+
+\newpage
+\chapter{Einleitung}
+
+\section*{Struktur der Arbeit}
+
+\newpage
+\chapter{Aufgabenstellung}
+
+\newpage
+\chapter{Architektur und Grundlagen}
+
+\section{Projektaufbau}
+
+\section{MongoDB}
+MongoDB ist ein dokument-orientiertes, Open-Source Datenbank-Programm. Dabei speichert MongoDB Daten in JSON-Dokumenten, sodass Datenstrukturen sich von Zeit zu Zeit verändern können und von Dokument zu Dokument unterschiedlich sind. Ein JSON-Dokument könnte also beispielsweise so aussehen: ...
+Ein wichtiges Feature ermöglicht es, Attribute ineinander zu verschachteln. 
+Im Idealfall können die Dokumente also stets auf den Anwendungscode angepasst werden. Mithilfe von Queries werden diese Daten erreicht und verändert. Dieses Datenbank-Schema zeichnet sich also vor allem durch Flexibilität aus und dadurch, dass es sehr einfach zu lernen ist. 
+Wird MongoDB beispielsweise in einem NodeJS-Projekt verwendet, sieht eine beispielhafte Query so aus: ...
+Hierbei muss jedoch zunächst überhaupt eine Verbindung zu der Datenbank hergestellt werden: ...
+Grundvoraussetzung ist, dass diese Datenbank und die sogenannte Collection, vergleichbar mit einer Relation bei einem relationalen Datenbankmodell, überhaupt existiert.
+
+\section{Express}
+Bei Express handelt es sich um ein serverseitiges Web-Application-Framework, welches oft als Standard-Server-Framework für Node.js bezeichnet wird. Es enthält eine Menge Features und erleichtert so das schnelle Aufsetzen eines Node.js-Servers und ermöglicht es, diesen Server schnell um Features zu erweitern. 
+So ermöglicht der „Express-Router“ beispielsweise das Definieren von REST-Routen, auf die mithilfe von GET-, POST, PUT und DELETE-Methoden zugegriffen werden kann. Mithilfe des Express-Routers kann das Verhalten definiert werden, das abgearbeitet werden soll, wenn auf eine der Routen zugegriffen wird. 
+Inzwischen bauen viele Node.js-Framework auf Express auf, da es sich für Single-Page, Multi-Page sowie für mobile und webbasierte Applikationen eignet. So gibt es beispielsweise den häufig verwendeten MERN-Stack, bestehend aus MongoDB, Express, React sowie Node.js, wie er auch in diesem Projekt verwendet wird. Weitere Beispiele sind KeystoneJS oder Kraken.
+Dank Express und Node.js wird Javascript mittlerweile nicht mehr nur für Frontend-Entwicklung von Webseiten verwendet, sondern es werden auch immer häufiger serverseitige Komponenten mithilfe von Javascript realisiert.
+Es unterstützt außerdem das MVC-Pattern, um Applikationen nach einem bestimmten Schema zu modellieren und ist betriebssystem unabhängig. 
+
+\section{React}
+React ist eine Javascript-Bibliothek für das Entwickeln von interaktiven Benutzeroberflächen. Mithilfe von View-Komponenten, die jeweils eine render()-Methode enthalten, werden einzelne Teile dieser React-UI realisiert. React kümmert sich vor allem um effizientes Rendering und das Updaten der Webanwendung.
+Die render()-Methode verarbeitet Input-Daten und gibt den HTML-Code zurück, der letztendlich angezeigt, also gerendert, wird.
+Eine hilfreiche Funktionalität von React ist der sogenannte State. Über diesen werden Daten verarbeitet und bei jeglicher Änderung der State-Variable wird die Seite neugeladen, die render()-Methode also erneut ausgeführt.
+Die state-Variable wird beispielsweise so verwendet: ...
+
+\section{Docker}
+
+\newpage
+\chapter{Umsetzung}
+
+\section{Frontend}
+
+\subsection{Bildupload}
+
+\subsection{Senden der Informationen an das Backend}
+
+\subsection{Bildanzeige}
+Jedes Mal, wenn die Seite aktualisiert wird, sollen anhand der aktuellen Informationen in der Datenbank alle Posts angezeigt werden. Hierfür wird ein GET-Request an die Route "/post/get/all" an das Backend geschickt. Das Resultat enthält den Namen des Verfassers sowie das dazugehörige Bild in einem JSON-Objekt.
+
+\section{Backend}
+
+\subsection{Speichern der Posts}
+Die Posts eines Benutzers werden mithilfe von cors()-Headern vom separaten Frontend an das Backend gesendet. Diese bestehen im Grunde lediglich aus dem Namen des Verfassers des Posts und dem Namen der Datei, in der das zugehörige Bild gespeichert wird. Empfängt das Backend einen POST-Request an die Route "/post/fileupload", wird der mitgesendete Post in der dahinterliegenden MongoDB-Collection gespeichert. Zusätzlich wird das Bild, welches im base64-Format gesendet wird, in PNG-Format umgewandelt und in einer Datei gespeichert. Der Name dieser Datei wird letztendlich in der Datenbank zusammen mit dem Namen des Verfassers gespeichert.
+Um die Einträge in der Collection zu speichern, wird eine Query verwendet, die der Collection einen neuen Eintrag mit einem "name"- und einem "filename"-Attribut hinzufügt.
+
+\subsection{Senden der Informationan an das Frontend}
+Empfängt das Backend einen GET-Request an die Route "/post/get/all", soll es alle bisher in der Collection gespeicherten Posts im JSON-Format an das Frontend zurückschicken. Hierfür wird eine Query verwendet, die die "post"-Collection ohne jegliche Bedingung durchsucht, sodass alle Einträge gefunden werden: ...
+
+\newpage
+\chapter{Fazit}
+\section{Erweiterungsmöglichkeiten}
+Dieses Projekt bietet eine gute Basis für zukünftige, umfangreichere Projekte. Es könnte gar zu einer umfangreichen Blog-Webseite erweitert werden. Hierfür könnte beispielsweise ein User-Authentifizierungssystem implementiert werden. Da MongoDB bereits zum Speichern der Posts verwendet wird, könnte die zugrundeliegende Datenbank einfach um eine User-Collection erweitert werden. Im Zuge dieser Erweiterung würde es sich weiterhin eignen, durch Session-Handling und Cookies das Benutzererlebnis zu verbessern, sodass man sich beispielsweise nur einmalig anmelden muss und dann jederzeit seine eigenen Posts ansehen kann. Weiterhin könnte ein Follower-System implementiert werden, bei dem ein Benutzer in der Lage ist, anderen Benutzern zu folgen und so auch die Posts eben dieser anderen Benutzer anzusehen. Ein Benutzer sieht also schlussendlich nur die Posts von anderen Benutzern, die ihn interessieren.
+Des Weiteren können die Posts umfangreicher und flexibler gestaltet werden, beispielsweise durch Link-Unterstützung, dem Hinzufügen einer aussagekräftigen Beschreibung oder auch dem Posten von Videos. Travelposter zeichnet sich also in der Umsetzung besonders durch flexible Erweiterbarkeit aus.
+
+\addcontentsline{toc}{chapter}{Literaturverzeichnis} 
+\bibliographystyle{plain}
+%\bibliography{literatur}
+
+\begin{thebibliography}{}
+	
+	\bibitem[1]{mongodb_definition}
+	\begin{tabular}[t]{p{6cm} p{10cm}}
+		MongoDB & https://www.mongodb.com/what-is-mongodb
+		\newline MongoDB, Inc.
+		\newline Stand 03.06.2018\\	
+	\end{tabular}
+	
+	\bibitem[2]{expressjs_frw}
+	\begin{tabular}[t]{p{6cm} p{10cm}}
+		Frameworks aufbauend auf Express & https://expressjs.com/en/resources/frameworks.html
+		\newline expressjs contributors
+		\newline Stand 03.06.2018\\	
+	\end{tabular}
+	
+	\bibitem[2]{expressjs}
+	\begin{tabular}[t]{p{6cm} p{10cm}}
+		Express.js & https://www.upwork.com/hiring/development/express-js-a-server-side-javascript-framework/
+		\newline Upwork
+		\newline Stand 03.06.2018\\	
+	\end{tabular}
+
+	\bibitem[2]{expressjs}
+	\begin{tabular}[t]{p{6cm} p{10cm}}
+		ReactJS & https://reactjs.org/
+		\newline Upwork
+		\newline Stand 03.06.2018\\	
+	\end{tabular}
+
+\end{thebibliography}
+
+
+%\section{Once upon the time}
+%\subsection{The MOON-Dream}
+%\begin{align}
+%E = mc^2 
+%\label{E}
+%\end{align}
+%\begin{align}
+%lovE &= \frac{faith}{Magic}Courage^2
+%\end{align}
+%\begin{figure}[h]
+%\begin{center}
+%\includegraphics[width=4cm]{belle.png}
+%\caption{The beautyfull Belle}
+%\label{belle_bild1}
+%\end{center}
+%\end{figure}
+%{\Large\itshape Felix Waldbach\par}
+
+
+\end{document}
