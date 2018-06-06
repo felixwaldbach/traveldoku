@@ -4,17 +4,17 @@
 \contentsline {chapter}{\numberline {3}Architektur und Grundlagen}{7}
 \contentsline {section}{\numberline {3.1}Projektaufbau}{7}
 \contentsline {section}{\numberline {3.2}MongoDB}{7}
-\contentsline {section}{\numberline {3.3}Express}{7}
-\contentsline {section}{\numberline {3.4}React}{8}
-\contentsline {section}{\numberline {3.5}Docker}{8}
-\contentsline {chapter}{\numberline {4}Umsetzung}{9}
-\contentsline {section}{\numberline {4.1}Frontend}{9}
-\contentsline {subsection}{\numberline {4.1.1}Bildupload}{9}
-\contentsline {subsection}{\numberline {4.1.2}Senden der Informationen an das Backend}{9}
-\contentsline {subsection}{\numberline {4.1.3}Bildanzeige}{9}
-\contentsline {section}{\numberline {4.2}Backend}{9}
-\contentsline {subsection}{\numberline {4.2.1}Speichern der Posts}{9}
-\contentsline {subsection}{\numberline {4.2.2}Senden der Informationan an das Frontend}{10}
-\contentsline {chapter}{\numberline {5}Fazit}{11}
-\contentsline {section}{\numberline {5.1}Erweiterungsm\IeC {\"o}glichkeiten}{11}
-\contentsline {chapter}{Literaturverzeichnis}{11}
+\contentsline {section}{\numberline {3.3}Express}{8}
+\contentsline {section}{\numberline {3.4}React}{9}
+\contentsline {section}{\numberline {3.5}Docker}{9}
+\contentsline {chapter}{\numberline {4}Umsetzung}{10}
+\contentsline {section}{\numberline {4.1}Frontend}{10}
+\contentsline {subsection}{\numberline {4.1.1}Bildupload}{10}
+\contentsline {subsection}{\numberline {4.1.2}Senden der Informationen an das Backend}{10}
+\contentsline {subsection}{\numberline {4.1.3}Bildanzeige}{10}
+\contentsline {section}{\numberline {4.2}Backend}{10}
+\contentsline {subsection}{\numberline {4.2.1}Speichern der Posts}{10}
+\contentsline {subsection}{\numberline {4.2.2}Senden der Informationan an das Frontend}{11}
+\contentsline {chapter}{\numberline {5}Fazit}{12}
+\contentsline {section}{\numberline {5.1}Erweiterungsm\IeC {\"o}glichkeiten}{12}
+\contentsline {chapter}{Literaturverzeichnis}{12}

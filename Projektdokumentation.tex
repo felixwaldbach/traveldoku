@@ -109,7 +109,6 @@
 \newpage
 \chapter*{Abkürzungsverzeichnis}
 \begin{acronym}[slmtA]
-\acro{Ajax}{Asynchronous JavaScript and XML}
 \acro{MVC}{Model-View-Controller}
 \acro{UI}{User Interface}
 \end{acronym}  
@@ -138,12 +137,44 @@
 \section{Projektaufbau}
 
 \section{MongoDB}
-MongoDB ist ein dokument-orientiertes, Open-Source Datenbank-Programm. Dabei speichert MongoDB Daten in JSON-Dokumenten, sodass Datenstrukturen sich von Zeit zu Zeit verändern können und von Dokument zu Dokument unterschiedlich sind. Ein JSON-Dokument könnte also beispielsweise so aussehen: ...
+MongoDB ist ein dokument-orientiertes, Open-Source Datenbank-Programm. Dabei speichert MongoDB Daten in JSON-Dokumenten, sodass Datenstrukturen sich von Zeit zu Zeit verändern können und von Dokument zu Dokument unterschiedlich sind. Ein JSON-Dokument sieht beispielsweise so aus:
+\begin{verbatim}
+{
+	ebene11: "Dieser Text befindet sich auf oberster Ebene",
+	ebene12: { 
+	           ebene21: "Dieser Text befindet sich eine Ebene weiter unten"
+	         },
+	ebene13: "Dieses Dokument kann beliebig viele Elemente enthalten und das auch
+	          von anderen Datentypen"
+}
+\end{verbatim}
+
+\noindent
 Ein wichtiges Feature ermöglicht es, Attribute ineinander zu verschachteln. 
 Im Idealfall können die Dokumente also stets auf den Anwendungscode angepasst werden. Mithilfe von Queries werden diese Daten erreicht und verändert. Dieses Datenbank-Schema zeichnet sich also vor allem durch Flexibilität aus und dadurch, dass es sehr einfach zu lernen ist. 
-Wird MongoDB beispielsweise in einem NodeJS-Projekt verwendet, sieht eine beispielhafte Query so aus: ...
-Hierbei muss jedoch zunächst überhaupt eine Verbindung zu der Datenbank hergestellt werden: ...
+Wird MongoDB beispielsweise in einem NodeJS-Projekt verwendet, sieht eine beispielhafte Query so aus: 
+
+\begin{verbatim}
+db.collection("testCollection").findOne({id: 0}, function(err, res) {
+	if(err) throw err;
+	else console.log("Query erfolgreich ausgefuehrt");
+});
+\end{verbatim}
+
+Hierbei muss jedoch zunächst überhaupt eine Verbindung zu der Datenbank hergestellt werden: 
+
+\begin{verbatim}
+const mongoClient = require('mongodb').MongoClient;
+const mongoURL = "mongodb://localhost:27017";
+
+mongoClient.connect(mongoURL, function (err, mgo) {
+    if (err) callback(err, mgo);
+    // Query, um die DB zu durchsuchen oder zu manipulieren
+});
+\end{verbatim}
+
 Grundvoraussetzung ist, dass diese Datenbank und die sogenannte Collection, vergleichbar mit einer Relation bei einem relationalen Datenbankmodell, überhaupt existiert.
+Abschliessend muss die Verbindung mit der Datenbank wieder beendet werden:
 
 \section{Express}
 Bei Express handelt es sich um ein serverseitiges Web-Application-Framework, welches oft als Standard-Server-Framework für Node.js bezeichnet wird. Es enthält eine Menge Features und erleichtert so das schnelle Aufsetzen eines Node.js-Servers und ermöglicht es, diesen Server schnell um Features zu erweitern. 
@@ -156,7 +187,16 @@ Es unterstützt außerdem das MVC-Pattern, um Applikationen nach einem bestimmte
 React ist eine Javascript-Bibliothek für das Entwickeln von interaktiven Benutzeroberflächen. Mithilfe von View-Komponenten, die jeweils eine render()-Methode enthalten, werden einzelne Teile dieser React-UI realisiert. React kümmert sich vor allem um effizientes Rendering und das Updaten der Webanwendung.
 Die render()-Methode verarbeitet Input-Daten und gibt den HTML-Code zurück, der letztendlich angezeigt, also gerendert, wird.
 Eine hilfreiche Funktionalität von React ist der sogenannte State. Über diesen werden Daten verarbeitet und bei jeglicher Änderung der State-Variable wird die Seite neugeladen, die render()-Methode also erneut ausgeführt.
-Die state-Variable wird beispielsweise so verwendet: ...
+Die state-Variable wird beispielsweise so verwendet:
+
+\begin{verbatim}
+// im constructor der React-Komponente
+this.state = {element1: "Dieses Element ist Teil des states"};
+
+//Zugreifen auf Elemente im state
+console.log(this.state.element1);
+\end{verbatim}
+
 
 \section{Docker}
 
@@ -170,7 +210,7 @@ Die state-Variable wird beispielsweise so verwendet: ...
 \subsection{Senden der Informationen an das Backend}
 
 \subsection{Bildanzeige}
-Jedes Mal, wenn die Seite aktualisiert wird, sollen anhand der aktuellen Informationen in der Datenbank alle Posts angezeigt werden. Hierfür wird ein GET-Request an die Route "/post/get/all" an das Backend geschickt. Das Resultat enthält den Namen des Verfassers sowie das dazugehörige Bild in einem JSON-Objekt.
+Jedes Mal, wenn die Seite aktualisiert wird, sollen anhand der aktuellen Informationen in der Datenbank alle Posts angezeigt werden. Hierfür wird ein GET-Request an die Route \textit{/post/get/all} an das Backend geschickt. Das Resultat enthält den Namen des Verfassers sowie das dazugehörige Bild in einem JSON-Objekt.
 
 \section{Backend}
 
@@ -179,7 +219,14 @@ Die Posts eines Benutzers werden mithilfe von cors()-Headern vom separaten Front
 Um die Einträge in der Collection zu speichern, wird eine Query verwendet, die der Collection einen neuen Eintrag mit einem "name"- und einem "filename"-Attribut hinzufügt.
 
 \subsection{Senden der Informationan an das Frontend}
-Empfängt das Backend einen GET-Request an die Route "/post/get/all", soll es alle bisher in der Collection gespeicherten Posts im JSON-Format an das Frontend zurückschicken. Hierfür wird eine Query verwendet, die die "post"-Collection ohne jegliche Bedingung durchsucht, sodass alle Einträge gefunden werden: ...
+Empfängt das Backend einen GET-Request an die Route \textit{/post/get/all}, soll es alle bisher in der Collection gespeicherten Posts im JSON-Format an das Frontend zurückschicken. Hierfür wird eine Query verwendet, die die "post"-Collection ohne jegliche Bedingung durchsucht, sodass alle Einträge gefunden werden:
+
+\begin{verbatim}
+db.collection("post").find({}, function(err, res) {
+    if(err) throw err;
+    else console.log("Query erfolgreich ausgefuehrt");
+});
+\end{verbatim}
 
 \newpage
 \chapter{Fazit}

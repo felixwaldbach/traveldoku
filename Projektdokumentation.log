@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.11.5)  4 JUN 2018 17:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.11.5)  6 JUN 2018 12:43
 entering extended mode
 **./Projektdokumentation.tex
 (Projektdokumentation.tex
@@ -881,6 +881,16 @@ Kapitel 2.
 
 ]
 Kapitel 3.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 141.
+
+("C:\Users\waldbach\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\t1lmtt.fd"
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+Overfull \hbox (20.23112pt too wide) in paragraph at lines 150--150
+[]\T1/lmtt/m/n/12 ebene13: "Dieses Dokument kann beliebig viele Elemente enthal
+ten und das auch[] 
+ []
+
 [7
 
 ]
@@ -890,35 +900,35 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[8]
+[8] [9]
 Kapitel 4.
-[9
+[10
 
-] [10]
+] [11]
 Kapitel 5.
-[11
+[12
 
 ]
-Overfull \hbox (42.27788pt too wide) in paragraph at lines 197--202
+Overfull \hbox (42.27788pt too wide) in paragraph at lines 244--249
 [][] 
  []
 
 
-Overfull \hbox (42.27788pt too wide) in paragraph at lines 204--209
+Overfull \hbox (42.27788pt too wide) in paragraph at lines 251--256
 [][] 
  []
 
 
-Overfull \hbox (42.27788pt too wide) in paragraph at lines 211--216
+Overfull \hbox (42.27788pt too wide) in paragraph at lines 258--263
 [][] 
  []
 
 
-Overfull \hbox (42.27788pt too wide) in paragraph at lines 218--223
+Overfull \hbox (42.27788pt too wide) in paragraph at lines 265--270
 [][] 
  []
 
-[12
+[13
 
 ] (Projektdokumentation.aux)
 
@@ -926,11 +936,11 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5916 strings out of 493323
- 86499 string characters out of 3128713
- 160561 words of memory out of 3000000
- 9292 multiletter control sequences out of 15000+200000
- 49857 words of font info for 46 fonts, out of 3000000 for 9000
+ 5957 strings out of 493323
+ 87194 string characters out of 3128713
+ 161511 words of memory out of 3000000
+ 9328 multiletter control sequences out of 15000+200000
+ 54437 words of font info for 48 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,11n,43p,952b,332s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/waldbach/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec
@@ -939,10 +949,12 @@ Here is how much of TeX's memory you used:
 blic/lm/lmcsc10.pfb><C:/Users/waldbach/AppData/Local/Programs/MiKTeX 2.9/fonts/
 type1/public/lm/lmr12.pfb><C:/Users/waldbach/AppData/Local/Programs/MiKTeX 2.9/
 fonts/type1/public/lm/lmr17.pfb><C:/Users/waldbach/AppData/Local/Programs/MiKTe
-X 2.9/fonts/type1/public/lm/lmro12.pfb>
-Output written on Projektdokumentation.pdf (13 pages, 238842 bytes).
+X 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Users/waldbach/AppData/Local/Program
+s/MiKTeX 2.9/fonts/type1/public/lm/lmro12.pfb><C:/Users/waldbach/AppData/Local/
+Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb>
+Output written on Projektdokumentation.pdf (14 pages, 281266 bytes).
 PDF statistics:
- 69 PDF objects out of 1000 (max. 8388607)
+ 80 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
