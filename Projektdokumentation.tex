@@ -200,10 +200,27 @@ console.log(this.state.element1);
 
 \section{Docker}
 
+Docker ermöglicht die \textit{containerization} von Anwendungen. Dies bedeutet, dass Anwendung nicht mehr direkt auf dem Host-Betriebssystem des Servers ausgeführt werden, sondern in einer vom Host-System getrennten Ebene ausgeführt werden. Der große Vorteil bei der Verwendung von Docker liegt in der Systemsicherheit und Geschwindigkeit. Docker Container sind, falls nicht gewollt, komplett voneinander getrennt und unabhängig. Es ist somit der einen Systemkomponente nicht ohne explizite Deklaration möglich auf andere Anwendungskomponenten zuzugreifen. Außerdem handelt es sich bei Docker um keine Virtualisierungslösung. Es muss somit nicht pro Container ein eigener Kernel bereitgestellt werden. Auf Grund dessen ist die Verwendung von Docker um einiges performanter als die Verwendung von vollen Virtualisierungslösungen wie \textit{HyperV}.
+
 \newpage
 \chapter{Umsetzung}
 
+\section{Grundlegendes}
+
+Die grundlegende  Architektur gliedert sich in das Frontend, Backend und Datenbank. Dabei besteht das Backend aus einem NGINX Webserver, der alle Anfragen an die Node.JS Anwendung weiterleitet. Er agiert somit als Proxy. Eine Ausnahme für die Weiterleitung an die Backend-Anwendung besteht in der Abhandlung der Anfragen an \textit{http://host.name/storage/*}. Alle Anfragen, die an diesen Pfad werden von NGINX direkt an das Dateisystem weitergeleitet. So können die großen Geschwindigkeitsvorteile von NGINX in der Austeilung von statischen Ressourcen verwendet werden.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Bilder_Doku/architecture_overview}
+	\caption[]{Architektur}
+\end{figure}
+
+Die Datenbank kommuniziert einzig und allein mit der Node.JS Anwendung. Dies bedeutet, dass jegliche Datenanfragen, die vom Frontend gestellt werden, erst vom NGINX-Server an die Node.JS Anwendung weitergegeben und von dort mit Hilfe der Datenbank beantwortet werden. Eine direkte Kommunikation ist aus Sicherheitsgründen nicht direkt zwischen dem Frontend und der Datenbank möglich.
+
 \section{Frontend}
+
+
+
 
 \subsection{Bildupload}
 
@@ -227,6 +244,35 @@ db.collection("post").find({}, function(err, res) {
     else console.log("Query erfolgreich ausgefuehrt");
 });
 \end{verbatim}
+
+\section{Deployment}
+Die Bereitstellung des Projektes kann komplett mit Hilfe von Docker bewältigt werden. Dazu steht eine \textit{docker-compose.yml} bereit. Jene besitzt folgende Struktur:
+
+\begin{verbatim}
+version: "3"
+services:
+    frontend:
+        build: https://github.com/felixwaldbach/travelposterfrontend.git
+        ports:
+            - "8000:80"
+    backend:
+        build: https://github.com/felixwaldbach/travelposter.git
+        ports:
+            - "5000:80"
+    db:
+        image: mongo
+        entrypoint: mongod --bind_ip_all
+        expose: 
+            - "27017"
+\end{verbatim}
+
+Zur Bereitstellung des \textbf{Frontends} wird ein eigen angepasstes Image verwendet. Dies gilt ebenfalls für die Bereitstellung des \textbf{Backends}. Beide Images werden beim ersten Start der docker-compose.yml gebaut. Das \textbf{Datenbank}-Image hingegeben wird nicht angepasst. MongoDB stellt bereits ein fertiges Image bereit, welches allen Anforderungen dieser Anwendung genügt. Es wird im Datenbank-Image ebenfalls kein permanentes Volumen eingebunden. Da es sich hier nur um eine Anwendung handelt, die die Möglichkeiten von Node.JS und Docker aufzeigen soll, wurde die Entscheidung getroffen, dass ein permanenter Datenspeicher nicht relevant sei.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\linewidth]{Bilder_Doku/docker}
+	\caption[]{Docker Aufbau}
+\end{figure}
 
 \newpage
 \chapter{Fazit}
