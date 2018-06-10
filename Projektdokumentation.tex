@@ -18,6 +18,8 @@
 \usepackage{setspace}
 \usepackage{hyperref}
 
+\input{config}
+
 \makeatletter
 \newcommand{\MSonehalfspacing}{%
   \setstretch{1.44}%  default
@@ -38,7 +40,7 @@
 \setcounter{tocdepth}{5} %/damit es auch im Inhaltsverzeichnis übernommen wird
 
 \author{Felix Waldbach, Marius Kiessling}
-\title{Travelposter Dokumentation}
+\title{TravelPoster Dokumentation}
 \date{September 2018}
 
 
@@ -94,7 +96,7 @@
 
 	\begin{tabular}{ll}
 		Abgabedatum: & 11. Juni 2018 \\		
-		Matrikelnummer, Kurs: & 8215018, /*1234567*/, TINF16B \\ 
+		Matrikelnummer, Kurs: & \matrikelnrFelix, \matrikelnrMarius, TINF16B \\ 
 		Dozent: & 
 		Dr. Ingolf \textsc{Buttig}\\ 
  
@@ -312,7 +314,7 @@ Eine Internetverbindung ist zu diesem Schritt notwendig, da der Code für das Ba
 \chapter{Fazit}
 \section{Erweiterungsmöglichkeiten}
 Dieses Projekt bietet eine gute Basis für zukünftige, umfangreichere Projekte. Es könnte gar zu einer umfangreichen Blog-Webseite erweitert werden. Hierfür könnte beispielsweise ein User-Authentifizierungssystem implementiert werden. Da MongoDB bereits zum Speichern der Posts verwendet wird, könnte die zugrundeliegende Datenbank einfach um eine User-Collection erweitert werden. Im Zuge dieser Erweiterung würde es sich weiterhin eignen, durch Session-Handling und Cookies das Benutzererlebnis zu verbessern, sodass man sich beispielsweise nur einmalig anmelden muss und dann jederzeit seine eigenen Posts ansehen kann. Weiterhin könnte ein Follower-System implementiert werden, bei dem ein Benutzer in der Lage ist, anderen Benutzern zu folgen und so auch die Posts eben dieser anderen Benutzer anzusehen. Ein Benutzer sieht also schlussendlich nur die Posts von anderen Benutzern, die ihn interessieren.
-Des Weiteren können die Posts umfangreicher und flexibler gestaltet werden, beispielsweise durch Link-Unterstützung, dem Hinzufügen einer aussagekräftigen Beschreibung oder auch dem Posten von Videos. Travelposter zeichnet sich also in der Umsetzung besonders durch flexible Erweiterbarkeit aus.
+Des Weiteren können die Posts umfangreicher und flexibler gestaltet werden, beispielsweise durch Link-Unterstützung, dem Hinzufügen einer aussagekräftigen Beschreibung oder auch dem Posten von Videos. TravelPoster zeichnet sich also in der Umsetzung besonders durch flexible Erweiterbarkeit aus.
 
 \addcontentsline{toc}{chapter}{Literaturverzeichnis} 
 \bibliographystyle{plain}
