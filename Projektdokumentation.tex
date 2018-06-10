@@ -131,23 +131,33 @@
 \newpage
 \chapter{Aufgabenstellung}
 
-Das hier vorgestellte Projekt sollte möglichst gut den Umfang der Vorlesung widerspiegeln. Da der Fokus der Vorlesung auf primär auf der Entwicklung moderner Node.JS Anwendung und der Bereitstellung von Anwendungen mit Hilfe moderner Container-Lösungen lag, wurde ebenfalls der Fokus des Projektes so gewählt. Der Umfang des Projektes entspricht somit den in der Vorlesung vermittelten Inhalten. Es wurde eine moderne Node.JS Anwendung entwickelt, die den Austausch von Bildern (oder auch \textit{Erinnerungen} genannt) ermöglicht. Dabei kann jeder Nutzer eigene Bilder teilen. Diese können dann von anderen Nutzern der Plattform betrachtet werden. In diesem Kontext wird ebenfalls der Docker Teil der Vorlesung wiedergegeben. Jede Anwendungskomponente kann unabhängig von den jeweils anderen mit Hilfe von Docker Containern bereitgestellt werden.
+Das hier vorgestellte Projekt sollte möglichst gut den Umfang der Vorlesung widerspiegeln. Da der Fokus der Vorlesung primär auf der Entwicklung moderner Node.JS Anwendung und der Bereitstellung von Anwendungen mit Hilfe moderner Container-Lösungen lag, wurde ebenfalls der Fokus des Projektes so gewählt. Der Umfang des Projektes entspricht somit den in der Vorlesung vermittelten Inhalten. Es wurde eine moderne Node.JS Anwendung entwickelt, die den Austausch von Bildern (oder auch \textit{Erinnerungen} genannt) ermöglicht. Dabei kann jeder Nutzer eigene Bilder teilen. Diese können dann von anderen Nutzern der Plattform betrachtet werden. In diesem Kontext wird ebenfalls der Docker Teil der Vorlesung wiedergegeben. Jede Anwendungskomponente kann unabhängig von den jeweils anderen mit Hilfe von Docker Containern bereitgestellt werden.
 
 \newpage
 \chapter{Architektur und Grundlagen}
 
 \section{Projektaufbau}
 
+Die grundlegende  Architektur gliedert sich in das Frontend, Backend und Datenbank. Dabei besteht das Backend aus einem NGINX Webserver, der alle Anfragen an die Node.JS Anwendung weiterleitet. Er agiert somit als Proxy. Eine Ausnahme für die Weiterleitung an die Backend-Anwendung besteht in der Abhandlung der Anfragen an \textit{http://host.name/storage/*}. Alle Anfragen, die an diesen Pfad werden von NGINX direkt an das Dateisystem weitergeleitet. So können die großen Geschwindigkeitsvorteile von NGINX in der Austeilung von statischen Ressourcen verwendet werden.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Bilder_Doku/architecture_overview}
+	\caption[]{Architektur}
+\end{figure}
+
+Die Datenbank kommuniziert einzig und allein mit der Node.JS Anwendung. Dies bedeutet, dass jegliche Datenanfragen, die vom Frontend gestellt werden, erst vom NGINX-Server an die Node.JS Anwendung weitergegeben und von dort mit Hilfe der Datenbank beantwortet werden. Eine direkte Kommunikation ist aus Sicherheitsgründen nicht direkt zwischen dem Frontend und der Datenbank möglich.
+
 \section{MongoDB}
 MongoDB ist ein dokument-orientiertes, Open-Source Datenbank-Programm. Dabei speichert MongoDB Daten in JSON-Dokumenten, sodass Datenstrukturen sich von Zeit zu Zeit verändern können und von Dokument zu Dokument unterschiedlich sind. Ein JSON-Dokument sieht beispielsweise so aus:
 \begin{verbatim}
 {
-	ebene11: "Dieser Text befindet sich auf oberster Ebene",
-	ebene12: { 
-	           ebene21: "Dieser Text befindet sich eine Ebene weiter unten"
-	         },
-	ebene13: "Dieses Dokument kann beliebig viele Elemente enthalten und das auch
-	          von anderen Datentypen"
+    ebene11: "Dieser Text befindet sich auf oberster Ebene",
+    ebene12: { 
+        ebene21: "Dieser Text befindet sich eine Ebene weiter unten"
+    },
+    ebene13: "Dieses Dokument kann beliebig viele Elemente enthalten und das auch
+        von anderen Datentypen"
 }
 \end{verbatim}
 
@@ -158,8 +168,8 @@ Wird MongoDB beispielsweise in einem NodeJS-Projekt verwendet, sieht eine beispi
 
 \begin{verbatim}
 db.collection("testCollection").findOne({id: 0}, function(err, res) {
-	if(err) throw err;
-	else console.log("Query erfolgreich ausgefuehrt");
+    if(err) throw err;
+    else console.log("Query erfolgreich ausgefuehrt");
 });
 \end{verbatim}
 
@@ -192,10 +202,10 @@ Eine hilfreiche Funktionalität von React ist der sogenannte State. Über diesen
 Die state-Variable wird beispielsweise so verwendet:
 
 \begin{verbatim}
-// im constructor der React-Komponente
+// Im constructor der React-Komponente
 this.state = {element1: "Dieses Element ist Teil des states"};
 
-//Zugreifen auf Elemente im state
+// Zugreifen auf Elemente im state
 console.log(this.state.element1);
 \end{verbatim}
 
@@ -206,18 +216,6 @@ Docker ermöglicht die \textit{containerization} von Anwendungen. Dies bedeutet,
 
 \newpage
 \chapter{Umsetzung}
-
-\section{Grundlegendes}
-
-Die grundlegende  Architektur gliedert sich in das Frontend, Backend und Datenbank. Dabei besteht das Backend aus einem NGINX Webserver, der alle Anfragen an die Node.JS Anwendung weiterleitet. Er agiert somit als Proxy. Eine Ausnahme für die Weiterleitung an die Backend-Anwendung besteht in der Abhandlung der Anfragen an \textit{http://host.name/storage/*}. Alle Anfragen, die an diesen Pfad werden von NGINX direkt an das Dateisystem weitergeleitet. So können die großen Geschwindigkeitsvorteile von NGINX in der Austeilung von statischen Ressourcen verwendet werden.
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.7\linewidth]{Bilder_Doku/architecture_overview}
-	\caption[]{Architektur}
-\end{figure}
-
-Die Datenbank kommuniziert einzig und allein mit der Node.JS Anwendung. Dies bedeutet, dass jegliche Datenanfragen, die vom Frontend gestellt werden, erst vom NGINX-Server an die Node.JS Anwendung weitergegeben und von dort mit Hilfe der Datenbank beantwortet werden. Eine direkte Kommunikation ist aus Sicherheitsgründen nicht direkt zwischen dem Frontend und der Datenbank möglich.
 
 \section{Frontend}
 
