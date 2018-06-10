@@ -238,20 +238,28 @@ Docker ermöglicht die \textit{containerization} von Anwendungen. Dies bedeutet,
 
 \section{Frontend}
 
+\subsection{Erstellen von \textit{Erinnerungen}}
+Als Erinnerung werden alle hochgeladenen Fotos bezeichnet. Wenn ein Nutzer auf der Hauptseite ein Bild auswählt (oder via Drag-and-Drop in Browser zieht), wird dieses in in einen lokalen Buffer geladen und als Base64 Wert codiert. Da moderne Browser nativ Base64 Werte darstellen können, erhält der Nutzer ein sofortiges visuelles Feedback in Form einer kleinen Bildvorschau. Der Nutzer kann nun seinen Namen eingeben und die \textit{Erinnerung} erstellen.
 
+Sobald der Nutzer auf den Button zum Hochladen der Bilder klickt, wird sein Name und das von ihm ausgewählte Bild (im Base64-Format) in ein JSON-Objekt geschrieben. Das JSON-Objekt besitzt dabei folgendes Format:
+\begin{verbatim}
+{
+    name: "Max Mustermann",
+    file: "VGVzdFRlc3RUZXN0VGVzdFRlc3Q [...] ="
+}
+\end{verbatim}
 
+Das JSON-Objekt wird daraufhin via POST-Methode an das Backend mit dem Pfad \textit{/post/fileupload} weitergegeben.
 
-\subsection{Bildupload}
-
-\subsection{Senden der Informationen an das Backend}
+Zuletzt lädt das Frontend die Liste von Erinnerungen neu, damit hochgeladene \textit{Erinnerungen} sofort für den Nutzer sichtbar sind.
 
 \subsection{Bildanzeige}
-Jedes Mal, wenn die Seite aktualisiert wird, sollen anhand der aktuellen Informationen in der Datenbank alle Posts angezeigt werden. Hierfür wird ein GET-Request an die Route \textit{/post/get/all} an das Backend geschickt. Das Resultat enthält den Namen des Verfassers sowie das dazugehörige Bild in einem JSON-Objekt.
+Jedes Mal, wenn die Seite aktualisiert wird, sollen anhand der aktuellen Informationen in der Datenbank alle Posts angezeigt werden. Hierfür wird ein GET-Request an die Route \textit{/post/get/all} an das Backend geschickt. Das Resultat enthält den Namen des Verfassers sowie den Dateinamen des Bildes. Der Browser stellt daraufhin einen weiteren GET-Request an das Backend mit dem Pfad \textit{/storage/FILENAME}), wobei FILENAME der Dateiname des Bildes ist. Wie das Backend diese Anfrage bearbeitet, ist dem Kapitel \textit{3.1 Projektaufbau} zu entnehmen.
 
 \section{Backend}
 
 \subsection{Speichern der Posts}
-Die Posts eines Benutzers werden mithilfe von cors()-Headern vom separaten Frontend an das Backend gesendet. Diese bestehen im Grunde lediglich aus dem Namen des Verfassers des Posts und dem Namen der Datei, in der das zugehörige Bild gespeichert wird. Empfängt das Backend einen POST-Request an die Route "/post/fileupload", wird der mitgesendete Post in der dahinterliegenden MongoDB-Collection gespeichert. Zusätzlich wird das Bild, welches im base64-Format gesendet wird, in PNG-Format umgewandelt und in einer Datei gespeichert. Der Name dieser Datei wird letztendlich in der Datenbank zusammen mit dem Namen des Verfassers gespeichert.
+Empfängt das Backend einen POST-Request an die Route "/post/fileupload", wird der mitgesendete Post in der dahinterliegenden MongoDB-Collection gespeichert. Zusätzlich wird das Bild, welches im Base64-Format gesendet wird, in das PNG-Format umgewandelt und in einer Datei gespeichert. Der Name dieser Datei wird letztendlich in der Datenbank zusammen mit dem Namen des Verfassers gespeichert.
 Um die Einträge in der Collection zu speichern, wird eine Query verwendet, die der Collection einen neuen Eintrag mit einem "name"- und einem "filename"-Attribut hinzufügt.
 
 \subsection{Senden der Informationan an das Frontend}
